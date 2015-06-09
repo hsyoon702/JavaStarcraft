@@ -12,3 +12,4 @@ The *JavaStarcraft* is an project which is building for educate Java language an
 
 ## License
 Released under the permissive [MIT License][].
+[MIT License]: https://github.com/Junbong/JavaStarcraft/blob/master/LICENSE
