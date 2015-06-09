@@ -1,5 +1,5 @@
 # JavaStarcraft
-The *JavaStarcraft* is an project which is building for educate Java language and OOP(Object oriented programming) paradigm.
+The *JavaStarcraft* is an project which is building for educate my students Java language and OOP(Object oriented programming) paradigm.
 
 ## Main Goal
 - Learn Java programming language
