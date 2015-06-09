@@ -1,5 +1,5 @@
 # JavaStarcraft
-This project is building for educate Java language and OOP(Object oriented programming) paradigm.
+The *JavaStarcraft* is an project which is building for educate Java language and OOP(Object oriented programming) paradigm.
 
 ## Main Goal
 - Learn Java programming language
@@ -9,3 +9,6 @@ This project is building for educate Java language and OOP(Object oriented progr
 
 ## Final Goal
 - Multi-player game based on UDP and TCP protocol
+
+## License
+Released under the permissive [MIT License][].
