@@ -5,7 +5,7 @@ import com.bong.starcraft.unit.TerranUnitTypes;
 import com.bong.starcraft.unit.Unit;
 import com.bong.starcraft.unit.ground.attackable.Firebat;
 import com.bong.starcraft.unit.ground.attackable.Marine;
-
+import com.bong.starcraft.unit.ground.healable.Medic;
 
 
 /**
@@ -32,6 +32,9 @@ public class Barrack extends AbstractProducableBuilding<Unit> {
 
 			case FIREBAT:
 				return new Firebat();
+
+			case MEDIC:
+				return new Medic();
 
 			default:
 				throw new UnsupportedOperationException();
