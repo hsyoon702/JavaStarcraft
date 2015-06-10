@@ -24,7 +24,17 @@ public abstract class AbstractProducableBuilding<T> extends AbstractBuilding {
 
 		// TODO: reduce player`s resource
 
-		return onProduce(unitTypes);
+
+		/*return onProduce(unitTypes);*/
+
+		T unit = onProduce(unitTypes);
+
+		if (unit != null) {
+			System.out.println(String.format("'%s' produce '%s'!",
+					getClass().getSimpleName(), unit));
+		}
+
+		return unit;
 	}
 
 

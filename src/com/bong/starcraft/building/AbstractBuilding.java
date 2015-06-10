@@ -7,6 +7,7 @@ package com.bong.starcraft.building;
 public abstract class AbstractBuilding implements Building {
 	private int mRemainingHitPoint;
 	private int mMaxHitPoint;
+	private boolean mIsBuiltComplete;
 
 
 
@@ -19,6 +20,7 @@ public abstract class AbstractBuilding implements Building {
 
 	/**
 	 * Max hit point
+	 *
 	 * @return
 	 */
 	@Override public int getMaxHitPoint() {
@@ -29,6 +31,7 @@ public abstract class AbstractBuilding implements Building {
 
 	/**
 	 * Usually minimal hit point is zero.
+	 *
 	 * @return 0
 	 */
 	@Override public int getMinHitPoint() {
@@ -47,7 +50,8 @@ public abstract class AbstractBuilding implements Building {
 		// If not destroyed yet
 		if (!isDestroyed()) {
 			mRemainingHitPoint -= damage;
-			if (getRemainingHitPoint() <= 0) destroy();
+			if (getRemainingHitPoint() <= 0)
+				destroy();
 		}
 
 		return false;
@@ -55,8 +59,63 @@ public abstract class AbstractBuilding implements Building {
 
 
 
+	@Override public boolean recover(int amount) {
+		// If not dead yet
+		if (!isDestroyed()) {
+			if (getRemainingHitPoint() < getMaxHitPoint()) {
+				mRemainingHitPoint += amount;
+				mRemainingHitPoint = Math.min(getMaxHitPoint(), mRemainingHitPoint);
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+
+
+	@Override public boolean isHealable() {
+		return true;
+	}
+
+
+
 	@Override public void build() {
-		System.out.println(String.format("'%s' built!", getClass().getSimpleName()));
+		/*System.out.println(String.format("'%s' built!", getClass().getSimpleName()));*/
+
+		Thread buildThread = new Thread(new Runnable() {
+			@Override public void run() {
+				// current time (milliseconds)
+				final long time1 = System.currentTimeMillis();
+
+				while ((System.currentTimeMillis() - time1) <
+						TerranBuildingTypes.COMMAND_CENTER.getRequiredProduceTime() * 1000) {
+					System.out.print(".");
+					try { Thread.sleep(1000); } catch (InterruptedException e) {}
+				}
+
+				System.out.println();
+
+				// Complete
+				mIsBuiltComplete = true;
+
+				System.out.println(String.format("'%s' built!", getClass().getSimpleName()));
+			}
+		});
+
+		buildThread.start();
+	}
+
+
+
+	@Override public boolean isBuiltComplete() {
+		return this.mIsBuiltComplete;
+	}
+
+
+
+	@Override public float getBuildProcessFactor() {
+		return 0;
 	}
 
 
@@ -71,3 +130,16 @@ public abstract class AbstractBuilding implements Building {
 		return (getRemainingHitPoint() <= 0);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

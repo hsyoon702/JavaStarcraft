@@ -7,6 +7,7 @@ package com.bong.starcraft;
 public interface StarcraftObject {
 	public int getMaxHitPoint();
 	public int getMinHitPoint();
+	public boolean isHealable();
 
 	/**
 	 * Retrieve remaining HP(hit point) of this unit
@@ -14,4 +15,5 @@ public interface StarcraftObject {
 	 */
 	public int getRemainingHitPoint();
 	public boolean hit(int demage);
+	public boolean recover(int amount);
 }

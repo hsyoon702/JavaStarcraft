@@ -10,21 +10,26 @@ import com.bong.starcraft.unit.ground.attackable.Firebat;
 import com.bong.starcraft.unit.ground.attackable.Marine;
 import com.bong.starcraft.unit.ground.healable.Medic;
 
+
+
 /**
  * Created by bong on 15. 6. 8.
  */
-public class SCV extends AbstractBuildableUnit<Building>{
-    // TODO
-    public SCV(){  super(100);   }
-
-
-    @Override protected String onTalk() {
-        return "SCV good to go sir?";
-    }
+public class SCV extends AbstractBuildableUnit<TerranBuildingTypes> {
+	public SCV() {
+		super(100);
+	}
 
 
 
-    public Building Build(TerranBuildingTypes myBuildingTypes){
+	@Override protected String onTalk() {
+		return "SCV good to go sir?";
+	}
+
+
+
+    /*
+	public Building Build(TerranBuildingTypes myBuildingTypes){
         switch (myBuildingTypes) {
             case BARRACK:
                 return new Barrack();
@@ -33,4 +38,17 @@ public class SCV extends AbstractBuildableUnit<Building>{
                 throw new UnsupportedOperationException();
         }
     }
+    */
+
+	
+
+	@Override protected Building onBuild(TerranBuildingTypes buildingTypes) {
+		switch (buildingTypes) {
+			case BARRACK:
+				return new Barrack();
+
+			default:
+				throw new UnsupportedOperationException();
+		}
+	}
 }

@@ -23,11 +23,11 @@ public abstract class AbstractAttackableUnit extends AbstractUnit {
 	public void attack(StarcraftObject obj) {
 		if (obj != null) {
 			// Can not damage itself
-			if (!this.equals(obj)) {
-				System.out.println(String.format("'%s' hits '%s'!: %d",
-						getClass().getSimpleName(), obj.getClass().getSimpleName(), getDamage()));
-
-				obj.hit(getDamage());
+			if (!this.equals(obj) &&
+					obj.hit(getDamage())) {
+				System.out.println(String.format("'%s' hits '%s'!: -%d (remain: %d)",
+						getClass().getSimpleName(), obj.getClass().getSimpleName(),
+						getDamage(), obj.getRemainingHitPoint()));
 			}
 		}
 	}
