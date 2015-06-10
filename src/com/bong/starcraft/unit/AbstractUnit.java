@@ -5,8 +5,8 @@ package com.bong.starcraft.unit;
  * Created by bong on 15. 6. 8.
  */
 public abstract class AbstractUnit implements Unit {
-	private int mRemainingHitPoint;
-	private int mMaxHitPoint;
+	public int mRemainingHitPoint;
+	public int mMaxHitPoint;
 
 
 
