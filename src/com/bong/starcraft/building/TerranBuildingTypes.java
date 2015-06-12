@@ -5,8 +5,8 @@ package com.bong.starcraft.building;
  * Created by ȫ�� on 2015-06-09.
  */
 public enum TerranBuildingTypes implements BuildingTypes {
-	COMMAND_CENTER(400, 0, 3*60),
-	BARRACK(150, 0, 100);
+	COMMAND_CENTER(400, 0, 10),
+	BARRACK(150, 0, 20);
 
 	private final int mRequiredMineral;
 	private final int mRequiredGas;

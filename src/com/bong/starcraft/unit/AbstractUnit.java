@@ -1,18 +1,32 @@
 package com.bong.starcraft.unit;
 
 
+import com.bong.starcraft.game.StarcraftGame;
+
+
+
 /**
  * Created by bong on 15. 6. 8.
  */
 public abstract class AbstractUnit implements Unit {
+	private final StarcraftGame mGameInstance;
+
 	private int mRemainingHitPoint;
 	private int mMaxHitPoint;
 
 
 
-	public AbstractUnit(int hitPoint) {
+	public AbstractUnit(StarcraftGame gameInstance, int hitPoint) {
+		this.mGameInstance = gameInstance;
+
 		this.mRemainingHitPoint = hitPoint;
 		this.mMaxHitPoint = mRemainingHitPoint;
+	}
+
+
+
+	@Override public StarcraftGame getGameInstance() {
+		return mGameInstance;
 	}
 
 

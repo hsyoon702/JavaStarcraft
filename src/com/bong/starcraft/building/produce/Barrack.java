@@ -1,6 +1,7 @@
 package com.bong.starcraft.building.produce;
 
 
+import com.bong.starcraft.game.StarcraftGame;
 import com.bong.starcraft.unit.TerranUnitTypes;
 import com.bong.starcraft.unit.Unit;
 import com.bong.starcraft.unit.ground.attackable.Firebat;
@@ -13,8 +14,8 @@ import com.bong.starcraft.unit.ground.healable.Medic;
  * Created by bong on 15. 6. 8.
  */
 public class Barrack extends AbstractProducableBuilding<Unit> {
-	public Barrack() {
-		super(700);
+	public Barrack(StarcraftGame gameInstance) {
+		super(gameInstance, 700);
 	}
 
 
@@ -29,13 +30,13 @@ public class Barrack extends AbstractProducableBuilding<Unit> {
 		switch (unitTypes) {
 			case MARINE:
 				TerranUnitTypes.MARINE.getRequiredMineral();
-				return new Marine();
+				return new Marine(getGameInstance());
 
 			case FIREBAT:
-				return new Firebat();
+				return new Firebat(getGameInstance());
 
 			case MEDIC:
-				return new Medic();
+				return new Medic(getGameInstance());
 
 			default:
 				throw new UnsupportedOperationException();

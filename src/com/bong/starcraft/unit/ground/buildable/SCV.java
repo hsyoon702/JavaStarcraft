@@ -1,14 +1,11 @@
 package com.bong.starcraft.unit.ground.buildable;
 
 
+import com.bong.starcraft.game.StarcraftGame;
 import com.bong.starcraft.building.Building;
 import com.bong.starcraft.building.TerranBuildingTypes;
 import com.bong.starcraft.building.produce.Barrack;
-import com.bong.starcraft.unit.TerranUnitTypes;
-import com.bong.starcraft.unit.Unit;
-import com.bong.starcraft.unit.ground.attackable.Firebat;
-import com.bong.starcraft.unit.ground.attackable.Marine;
-import com.bong.starcraft.unit.ground.healable.Medic;
+import com.bong.starcraft.building.produce.CommandCenter;
 
 
 
@@ -16,8 +13,8 @@ import com.bong.starcraft.unit.ground.healable.Medic;
  * Created by bong on 15. 6. 8.
  */
 public class SCV extends AbstractBuildableUnit<TerranBuildingTypes> {
-	public SCV() {
-		super(100);
+	public SCV(StarcraftGame gameInstance) {
+		super(gameInstance, 100);
 	}
 
 
@@ -44,8 +41,11 @@ public class SCV extends AbstractBuildableUnit<TerranBuildingTypes> {
 
 	@Override protected Building onBuild(TerranBuildingTypes buildingTypes) {
 		switch (buildingTypes) {
+			case COMMAND_CENTER:
+				return new CommandCenter(getGameInstance());
+
 			case BARRACK:
-				return new Barrack();
+				return new Barrack(getGameInstance());
 
 			default:
 				throw new UnsupportedOperationException();

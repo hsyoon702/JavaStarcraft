@@ -1,10 +1,17 @@
 package com.bong.starcraft;
 
 
+import com.bong.starcraft.game.StarcraftGame;
+
+
+
 /**
  * Created by bong on 15. 6. 8.
  */
 public interface StarcraftObject {
+	public StarcraftGame getGameInstance();
+
+
 	public int getMaxHitPoint();
 	public int getMinHitPoint();
 	public boolean isHealable();

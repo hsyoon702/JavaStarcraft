@@ -1,19 +1,35 @@
 package com.bong.starcraft.building;
 
 
+import com.bong.starcraft.game.StarcraftGame;
+
+
+
 /**
  * Created by bong on 15. 6. 8.
  */
 public abstract class AbstractBuilding implements Building {
+	private final StarcraftGame mGameInstance;
+	private final String mName;
+
 	private int mRemainingHitPoint;
 	private int mMaxHitPoint;
 	private boolean mIsBuiltComplete;
 
 
 
-	public AbstractBuilding(int hitPoint) {
+	public AbstractBuilding(StarcraftGame gameInstance, int hitPoint) {
+		this.mGameInstance = gameInstance;
+		this.mName = getClass().getSimpleName();
+
 		this.mRemainingHitPoint = hitPoint;
 		this.mMaxHitPoint = mRemainingHitPoint;
+	}
+
+
+
+	@Override public StarcraftGame getGameInstance() {
+		return mGameInstance;
 	}
 
 
@@ -81,29 +97,10 @@ public abstract class AbstractBuilding implements Building {
 
 
 	@Override public void build() {
-		/*System.out.println(String.format("'%s' built!", getClass().getSimpleName()));*/
+		// Complete
+		mIsBuiltComplete = true;
 
-		Thread buildThread = new Thread(new Runnable() {
-			@Override public void run() {
-				// current time (milliseconds)
-				final long time1 = System.currentTimeMillis();
-
-				while ((System.currentTimeMillis() - time1) <
-						TerranBuildingTypes.COMMAND_CENTER.getRequiredProduceTime() * 1000) {
-					System.out.print(".");
-					try { Thread.sleep(1000); } catch (InterruptedException e) {}
-				}
-
-				System.out.println();
-
-				// Complete
-				mIsBuiltComplete = true;
-
-				System.out.println(String.format("'%s' built!", getClass().getSimpleName()));
-			}
-		});
-
-		buildThread.start();
+		System.out.println(String.format("'%s' built!", getClass().getSimpleName()));
 	}
 
 

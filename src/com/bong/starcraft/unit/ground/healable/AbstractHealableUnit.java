@@ -1,9 +1,9 @@
 package com.bong.starcraft.unit.ground.healable;
 
 
+import com.bong.starcraft.game.StarcraftGame;
 import com.bong.starcraft.StarcraftObject;
 import com.bong.starcraft.unit.AbstractUnit;
-import com.bong.starcraft.unit.Unit;
 
 
 
@@ -11,8 +11,8 @@ import com.bong.starcraft.unit.Unit;
  * Created by ȫ�� on 2015-06-09.
  */
 public abstract class AbstractHealableUnit extends AbstractUnit {
-	public AbstractHealableUnit(int hitPoint) {
-		super(hitPoint);
+	public AbstractHealableUnit(StarcraftGame gameInstance, int hitPoint) {
+		super(gameInstance, hitPoint);
 	}
 
 

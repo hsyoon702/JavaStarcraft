@@ -1,12 +1,16 @@
 package com.bong.starcraft.unit.ground.healable;
 
 
+import com.bong.starcraft.game.StarcraftGame;
+
+
+
 /**
  * Created by bong on 15. 6. 8.
  */
 public class Medic extends AbstractHealableUnit {
-	public Medic() {
-		super(125);
+	public Medic(StarcraftGame gameInstance) {
+		super(gameInstance, 125);
 	}
 
 

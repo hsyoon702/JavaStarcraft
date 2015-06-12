@@ -1,12 +1,16 @@
 package com.bong.starcraft.unit.ground.attackable;
 
 
+import com.bong.starcraft.game.StarcraftGame;
+
+
+
 /**
  * Created by bong on 15. 6. 8.
  */
 public class Firebat extends AbstractAttackableUnit {
-	public Firebat() {
-		super(250);
+	public Firebat(StarcraftGame gameInstance) {
+		super(gameInstance, 250);
 	}
 
 
