@@ -1,27 +1,27 @@
 package com.bong.starcraft.unit.ground.healable;
 
 
-import com.bong.starcraft.game.StarcraftGame;
-
-
+import com.bong.starcraft.unit.Unit;
 
 /**
  * Created by bong on 15. 6. 8.
  */
 public class Medic extends AbstractHealableUnit {
-	public Medic(StarcraftGame gameInstance) {
-		super(gameInstance, 125);
-	}
+    // TODO
+
+    public Medic(){  super(125);   }
 
 
 
-	@Override public int getHeallingFactor() {
-		return 5;
-	}
+    @Override public int getHeal() {
+        return 5;
+    }
 
 
 
-	@Override protected String onTalk() {
-		return "Did someone page me?";
-	}
+    @Override protected String onTalk() {
+        return "Did someone page me?";
+    }
+
+
 }
