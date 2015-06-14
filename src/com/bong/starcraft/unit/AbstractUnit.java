@@ -1,18 +1,38 @@
 package com.bong.starcraft.unit;
 
 
+import com.bong.starcraft.game.StarcraftGame;
+
+
+
 /**
  * Created by bong on 15. 6. 8.
  */
 public abstract class AbstractUnit implements Unit {
-	public int mRemainingHitPoint;
-	public int mMaxHitPoint;
+	private final StarcraftGame mGameInstance;
+
+	private int mRemainingHitPoint;
+	private int mMaxHitPoint;
 
 
 
-	public AbstractUnit(int hitPoint) {
+	public AbstractUnit(StarcraftGame gameInstance, int hitPoint) {
+		this.mGameInstance = gameInstance;
+
 		this.mRemainingHitPoint = hitPoint;
 		this.mMaxHitPoint = mRemainingHitPoint;
+	}
+
+
+
+	@Override public StarcraftGame getGameInstance() {
+		return mGameInstance;
+	}
+
+
+
+	@Override public String toString() {
+		return getClass().getSimpleName();
 	}
 
 
@@ -47,11 +67,37 @@ public abstract class AbstractUnit implements Unit {
 		// If not died yet
 		if (isAlive()) {
 			mRemainingHitPoint -= damage;
-			if (getRemainingHitPoint() <= 0) this.die();
+
+			if (getRemainingHitPoint() <= 0) {
+				this.die();
+				return false;
+			}
+
 			return true;
 		}
 
 		return false;
+	}
+
+
+
+	@Override public boolean recover(int amount) {
+		// If not dead yet
+		if (isAlive()) {
+			if (getRemainingHitPoint() < getMaxHitPoint()) {
+				mRemainingHitPoint += amount;
+				mRemainingHitPoint = Math.min(getMaxHitPoint(), mRemainingHitPoint);
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+
+
+	@Override public boolean isHealable() {
+		return true;
 	}
 
 

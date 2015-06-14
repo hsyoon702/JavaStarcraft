@@ -1,6 +1,7 @@
 package com.bong.starcraft.building.produce;
 
 
+import com.bong.starcraft.game.StarcraftGame;
 import com.bong.starcraft.building.AbstractBuilding;
 import com.bong.starcraft.unit.TerranUnitTypes;
 
@@ -10,8 +11,8 @@ import com.bong.starcraft.unit.TerranUnitTypes;
  * Created by bong on 15. 6. 8.
  */
 public abstract class AbstractProducableBuilding<T> extends AbstractBuilding {
-	public AbstractProducableBuilding(int hitPoint) {
-		super(hitPoint);
+	public AbstractProducableBuilding(StarcraftGame gameInstance, int hitPoint) {
+		super(gameInstance, hitPoint);
 	}
 
 
@@ -24,7 +25,17 @@ public abstract class AbstractProducableBuilding<T> extends AbstractBuilding {
 
 		// TODO: reduce player`s resource
 
-		return onProduce(unitTypes);
+
+		/*return onProduce(unitTypes);*/
+
+		T unit = onProduce(unitTypes);
+
+		if (unit != null) {
+			System.out.println(String.format("'%s' produce '%s'!",
+					getClass().getSimpleName(), unit));
+		}
+
+		return unit;
 	}
 
 

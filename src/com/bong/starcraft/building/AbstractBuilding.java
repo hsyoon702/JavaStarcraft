@@ -1,24 +1,42 @@
 package com.bong.starcraft.building;
 
 
+import com.bong.starcraft.game.StarcraftGame;
+
+
+
 /**
  * Created by bong on 15. 6. 8.
  */
 public abstract class AbstractBuilding implements Building {
+	private final StarcraftGame mGameInstance;
+	private final String mName;
+
 	private int mRemainingHitPoint;
 	private int mMaxHitPoint;
+	private boolean mIsBuiltComplete;
 
 
 
-	public AbstractBuilding(int hitPoint) {
+	public AbstractBuilding(StarcraftGame gameInstance, int hitPoint) {
+		this.mGameInstance = gameInstance;
+		this.mName = getClass().getSimpleName();
+
 		this.mRemainingHitPoint = hitPoint;
 		this.mMaxHitPoint = mRemainingHitPoint;
 	}
 
 
 
+	@Override public StarcraftGame getGameInstance() {
+		return mGameInstance;
+	}
+
+
+
 	/**
 	 * Max hit point
+	 *
 	 * @return
 	 */
 	@Override public int getMaxHitPoint() {
@@ -29,6 +47,7 @@ public abstract class AbstractBuilding implements Building {
 
 	/**
 	 * Usually minimal hit point is zero.
+	 *
 	 * @return 0
 	 */
 	@Override public int getMinHitPoint() {
@@ -47,7 +66,8 @@ public abstract class AbstractBuilding implements Building {
 		// If not destroyed yet
 		if (!isDestroyed()) {
 			mRemainingHitPoint -= damage;
-			if (getRemainingHitPoint() <= 0) destroy();
+			if (getRemainingHitPoint() <= 0)
+				destroy();
 		}
 
 		return false;
@@ -55,8 +75,44 @@ public abstract class AbstractBuilding implements Building {
 
 
 
+	@Override public boolean recover(int amount) {
+		// If not dead yet
+		if (!isDestroyed()) {
+			if (getRemainingHitPoint() < getMaxHitPoint()) {
+				mRemainingHitPoint += amount;
+				mRemainingHitPoint = Math.min(getMaxHitPoint(), mRemainingHitPoint);
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+
+
+	@Override public boolean isHealable() {
+		return true;
+	}
+
+
+
 	@Override public void build() {
+		// Complete
+		mIsBuiltComplete = true;
+
 		System.out.println(String.format("'%s' built!", getClass().getSimpleName()));
+	}
+
+
+
+	@Override public boolean isBuiltComplete() {
+		return this.mIsBuiltComplete;
+	}
+
+
+
+	@Override public float getBuildProcessFactor() {
+		return 0;
 	}
 
 
@@ -71,3 +127,16 @@ public abstract class AbstractBuilding implements Building {
 		return (getRemainingHitPoint() <= 0);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
