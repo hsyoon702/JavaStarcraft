@@ -6,7 +6,11 @@ package com.bong.starcraft.building;
  */
 public enum TerranBuildingTypes implements BuildingTypes {
 	COMMAND_CENTER(400, 0, 10),
-	BARRACK(150, 0, 20);
+	BARRACK(150, 0, 20),
+	SUPPLY_DEPOT(100, 0, 10),
+	REFINERY(100, 0, 15),
+	ACADEMY(150, 30, 25);
+
 
 	private final int mRequiredMineral;
 	private final int mRequiredGas;
